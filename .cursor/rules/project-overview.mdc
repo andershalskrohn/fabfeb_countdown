@@ -1,0 +1,148 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# FabFeb Countdown VS Code Extension - Cursor Project Rules
+
+## Project Overview
+This is a VS Code extension project called "FabFeb Countdown" that creates an interactive animated donut sprite companion in VS Code. The sprite provides countdown functionality and moves around the editor with delightful animations.
+
+## Core Project Files (ALWAYS READ FIRST)
+- `@FABFEB_PLAN.md` - Master engineering plan with 9 milestones and detailed architecture
+- `@project_progress.md` - Live progress tracker with milestone completion status
+- `@project_scope.md` - Quick project context and current state summary
+- `@package.json` - Extension manifest with commands, configuration schema, and dependencies
+
+## Project Structure & Key Files
+```
+fabfeb_countdown/
+├── src/
+│   ├── extension.ts              # Main extension entry point
+│   ├── config/
+│   │   └── ConfigurationManager.ts # Settings management and validation
+│   └── webview/
+│       └── WebviewManager.ts     # Webview creation and sprite management
+├── assets/
+│   └── fabfeb-donut.svg         # User's custom donut sprite asset
+├── FABFEB_PLAN.md               # 📋 Master engineering plan (READ FIRST)
+├── project_progress.md          # 📊 Progress tracker (ALWAYS UPDATE)
+└── project_scope.md             # 🎯 Project context summary
+```
+
+## Development Guidelines
+
+### 1. Always Start By Reading Context
+- **MANDATORY**: Read `FABFEB_PLAN.md` to understand the full project vision
+- **MANDATORY**: Check `project_progress.md` for current milestone status
+- **MANDATORY**: Review `project_scope.md` for quick context
+
+### 2. Progress Tracking Rules
+- **ALWAYS** update `project_progress.md` when completing tasks
+- Mark tasks as `[x]` when completed, `[ ]` when pending
+- Update milestone status from `PENDING` to `COMPLETED` when all tasks done
+- Update overall progress percentage in the summary section
+- Add new accomplishments to the "Key Accomplishments" section
+
+### 3. Code Quality Standards
+- Use TypeScript with strict mode
+- Follow VS Code extension development best practices
+- Implement proper error handling and logging
+- Use async/await for asynchronous operations
+- Add comprehensive JSDoc comments for all public methods
+
+### 4. Extension-Specific Rules
+- All configuration must be defined in `package.json` contributes.configuration
+- Use proper VS Code APIs (vscode.* namespace)
+- Implement proper webview security (CSP, nonce, URI sanitization)
+- Handle extension activation/deactivation lifecycle properly
+- Use proper message passing between extension host and webview
+
+### 5. Webview Development
+- Use secure Content Security Policy
+- Implement proper resource loading with webview URIs
+- Handle window resize events for sprite positioning
+- Use requestAnimationFrame for smooth animations
+- Implement proper cleanup to prevent memory leaks
+
+### 6. Asset Management
+- Load external assets (like fabfeb-donut.svg) using webview.asWebviewUri()
+- Support both SVG and PNG formats with fallbacks
+- Optimize asset loading for performance
+- Use proper MIME types and CSP permissions
+
+### 7. Animation System
+- Use CSS keyframes for smooth animations
+- Implement collision detection for sprite movement
+- Support configurable animation speeds (slow/normal/fast)
+- Use transform properties for performance
+- Implement proper animation cleanup
+
+### 8. Configuration Management
+- Validate all user inputs
+- Provide sensible defaults
+- Handle configuration changes in real-time
+- Support date validation and parsing
+- Implement proper error messages for invalid configs
+
+## Current Project Status (Update as needed)
+- **Progress**: 77% Complete (5 of 9 milestones done)
+- **Current Milestone**: Milestone 6 - User Experience Enhancements
+- **Active Issues**: Sprite asset loading from external file
+- **Next Priority**: Theme integration and performance optimization
+
+## Common Tasks & Patterns
+
+### Adding New Configuration
+1. Add to `package.json` contributes.configuration
+2. Update `FabFebConfig` interface in ConfigurationManager.ts
+3. Add validation method in ConfigurationManager
+4. Update webview message handling if needed
+5. Update progress tracker
+
+### Debugging Extension
+- Use `npm run compile` to check TypeScript errors
+- Press F5 to launch Extension Development Host
+- Check console for debug messages
+- Look for notification messages on extension activation
+
+### Working with Webview
+- Always use nonce for script tags
+- Use webview.asWebviewUri() for local resources
+- Implement proper message passing with type safety
+- Handle webview disposal and cleanup
+
+## Milestone-Based Development
+Follow the 9-milestone structure from FABFEB_PLAN.md:
+1. ✅ Project Scaffolding (DONE)
+2. ✅ Configuration System (DONE) 
+3. ✅ Webview Foundation (DONE)
+4. ✅ Sprite Animation System (DONE)
+5. ✅ Countdown Logic and UI (DONE)
+6. ⏳ User Experience Enhancements (IN PROGRESS)
+7. ⏳ Testing and Quality Assurance
+8. ⏳ Documentation and Packaging
+9. ⏳ Publishing and Distribution
+
+## Communication Style
+- Be enthusiastic about the FabFeb donut! 🍩
+- Provide clear progress updates
+- Explain technical decisions
+- Always reference milestone context
+- Use emojis appropriately for engagement
+
+## Error Handling Approach
+- Graceful degradation for missing features
+- User-friendly error messages
+- Comprehensive logging for debugging
+- Proper cleanup on errors
+- Recovery mechanisms where possible
+
+## Testing Strategy
+- Manual testing in Extension Development Host
+- Configuration validation testing
+- Cross-platform compatibility checks
+- Performance monitoring during animations
+- User interaction testing
+
+Remember: This is a fun, engaging project that brings joy to developers through an animated donut companion! Keep the implementation delightful while maintaining professional code quality. 

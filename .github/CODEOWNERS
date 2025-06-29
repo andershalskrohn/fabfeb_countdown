@@ -1,0 +1,12 @@
+# Global owners
+* @andershalskrohn
+
+# TypeScript source files
+/src/ @andershalskrohn
+
+# Configuration files
+/package.json @andershalskrohn
+/tsconfig.json @andershalskrohn
+
+# GitHub workflows
+/.github/ @andershalskrohn
