@@ -1,19 +1,20 @@
 {
   "name": "fabfeb-countdown",
   "displayName": "FabFeb Countdown",
-  "description": "💚 Are you as exictes as I am for Fabric Fabruary 2026? This extension will count down the days!",
-  "version": "1.0.0",
+  "description": "💚 Are you as exicted as I am for Fabric Fabruary 2026? This extension will count down the days!",
+  "version": "1.0.2",
   "publisher": "andershalskrohn",
   "repository": {
     "type": "git",
     "url": "https://github.com/andershalskrohn/fabfeb_countdown.git"
-  },  "icon": "assets/icon.png",
+  },
+  "icon": "assets/icon.png",
   "engines": {
     "vscode": "^1.60.0"
   },
   "categories": [
-    "Fun",
-    "Other"
+    "Other",
+    "Visualization"
   ],
   "keywords": [
     "countdown",
@@ -49,7 +50,6 @@
           "default": "2026-02-05",
           "description": "Target date for countdown"
         },
-
         "fabfebCountdown.animationSpeed": {
           "type": "string",
           "enum": [
