@@ -31,8 +31,6 @@ export function activate(context: vscode.ExtensionContext) {
         webviewManager.createWebviewPanel();
         console.log('Webview panel created successfully');
         
-        // Show a notification that the extension is active
-        vscode.window.showInformationMessage('🍩 FabFeb Countdown is now active! Look for the donut sprite in the webview panel.');
     } catch (error) {
         console.error('Error creating webview panel:', error);
         vscode.window.showErrorMessage('Failed to create FabFeb Countdown webview: ' + error);

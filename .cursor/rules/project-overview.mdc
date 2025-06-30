@@ -146,3 +146,6 @@ Follow the 9-milestone structure from FABFEB_PLAN.md:
 - User interaction testing
 
 Remember: This is a fun, engaging project that brings joy to developers through an animated donut companion! Keep the implementation delightful while maintaining professional code quality. 
+
+## Git Workflow
+**Important** After every code change give a suggested git commit message reflecting what was changed. Make it a one line and concise.

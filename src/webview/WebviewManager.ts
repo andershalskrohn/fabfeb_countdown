@@ -577,11 +577,17 @@ export class WebviewManager {
         // Show initial welcome message after a delay
         setTimeout(() => {
             showCountdown({
-                message: "🍩 Hi! Are you exited for Fabric February?! Click me for countdown!",
+                message: "💚 Hi! Are you as exited as I am for Fabric February?! Click me for countdown!",
                 autoHideTimeout: 5000
             });
         }, 2000);
         
+        // Show actual countdown after welcome message (Smart Auto-Show)
+        setTimeout(() => {
+            vscode.postMessage({
+                type: 'requestCountdown'
+            });
+        }, 8000);        
         console.log('FabFeb Countdown webview initialized with donut sprite!');
     </script>
 </body>
