@@ -1,9 +1,13 @@
 {
   "name": "fabfeb-countdown",
   "displayName": "FabFeb Countdown",
-  "description": "Interactive countdown sprite for VS Code",
-  "version": "0.1.0",
+  "description": "💚 Are you as exictes as I am for Fabric Fabruary 2026? This extension will count down the days!",
+  "version": "1.0.0",
   "publisher": "andershalskrohn",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andershalskrohn/fabfeb_countdown.git"
+  },  "icon": "assets/icon.png",
   "engines": {
     "vscode": "^1.60.0"
   },
@@ -42,7 +46,7 @@
         "fabfebCountdown.targetDate": {
           "type": "string",
           "format": "date",
-          "default": "2026-02-01",
+          "default": "2026-02-05",
           "description": "Target date for countdown"
         },
 
