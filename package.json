@@ -1,0 +1,92 @@
+{
+  "name": "fabfeb-countdown",
+  "displayName": "FabFeb Countdown",
+  "description": "Interactive countdown sprite for VS Code",
+  "version": "0.1.0",
+  "publisher": "andershalskrohn",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Fun",
+    "Other"
+  ],
+  "keywords": [
+    "countdown",
+    "sprite",
+    "animation",
+    "fun"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "fabfeb.showCountdown",
+        "title": "Show Countdown",
+        "category": "FabFeb"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "fabfeb.showCountdown",
+        "key": "ctrl+shift+f",
+        "mac": "cmd+shift+f"
+      }
+    ],
+    "configuration": {
+      "title": "FabFeb Countdown",
+      "properties": {
+        "fabfebCountdown.targetDate": {
+          "type": "string",
+          "format": "date",
+          "default": "2026-02-01",
+          "description": "Target date for countdown"
+        },
+
+        "fabfebCountdown.animationSpeed": {
+          "type": "string",
+          "enum": [
+            "slow",
+            "normal",
+            "fast"
+          ],
+          "default": "normal",
+          "description": "Speed of sprite animations"
+        },
+        "fabfebCountdown.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the FabFeb countdown sprite"
+        },
+        "fabfebCountdown.autoHideTimeout": {
+          "type": "number",
+          "default": 3000,
+          "minimum": 1000,
+          "maximum": 10000,
+          "description": "Time in milliseconds before speech bubble auto-hides"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "16.x",
+    "@types/vscode": "^1.60.0",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "eslint": "^8.20.0",
+    "typescript": "^4.7.4",
+    "vsce": "^1.97.0"
+  }
+}
