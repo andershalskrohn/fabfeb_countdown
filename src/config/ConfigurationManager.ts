@@ -5,15 +5,24 @@ export interface FabFebConfig {
     animationSpeed: 'slow' | 'normal' | 'fast';
     enabled: boolean;
     autoHideTimeout: number;
+    currentMessageIndex: number;
 }
 
 export class ConfigurationManager {
     private static readonly CONFIG_SECTION = 'fabfebCountdown';
     private configurationChangeEmitter = new vscode.EventEmitter<FabFebConfig>();
     public readonly onConfigurationChanged = this.configurationChangeEmitter.event;
+    
+    private readonly alternatingMessages: string[] = [
+        '',
+        'Remember! The call for speakers close August 31!',
+        '💚 #SNÆCKS 💚',
+        '💚'
+    ];
+    
+    private currentMessageIndex: number = 0;
 
     constructor() {
-        // Listen for configuration changes
         vscode.workspace.onDidChangeConfiguration(this.handleConfigurationChanged, this);
     }
 
@@ -24,8 +33,36 @@ export class ConfigurationManager {
             targetDate: this.validateDate(config.get<string>('targetDate', '2026-02-01')),
             animationSpeed: this.validateAnimationSpeed(config.get<string>('animationSpeed', 'normal')),
             enabled: config.get<boolean>('enabled', true),
-            autoHideTimeout: this.validateTimeout(config.get<number>('autoHideTimeout', 3000))
+            autoHideTimeout: this.validateTimeout(config.get<number>('autoHideTimeout', 3000)),
+            currentMessageIndex: this.currentMessageIndex
         };
+    }
+
+    public getNextAlternatingMessage(targetDate: string): string {
+        const daysUntil = this.calculateDaysUntil(targetDate);
+        this.alternatingMessages[0] = this.formatCountdownMessage(daysUntil, targetDate);
+        
+        const message = this.alternatingMessages[this.currentMessageIndex];
+        
+        this.currentMessageIndex = (this.currentMessageIndex + 1) % this.alternatingMessages.length;
+        
+        console.log(`Message cycling: showing message ${this.currentMessageIndex - 1 >= 0 ? this.currentMessageIndex - 1 : this.alternatingMessages.length - 1}, next will be ${this.currentMessageIndex}`);
+        
+        return message;
+    }
+
+    public addAlternatingMessage(message: string): void {
+        this.alternatingMessages.push(message);
+        console.log(`Added new alternating message: "${message}". Total messages: ${this.alternatingMessages.length}`);
+    }
+
+    public getAllAlternatingMessages(): string[] {
+        return [...this.alternatingMessages];
+    }
+
+    public resetMessageCycle(): void {
+        this.currentMessageIndex = 0;
+        console.log('Message cycle reset to beginning');
     }
 
     public calculateDaysUntil(targetDate: string): number {
@@ -33,13 +70,11 @@ export class ConfigurationManager {
             const target = new Date(targetDate);
             const now = new Date();
             
-            // Validate the target date
             if (isNaN(target.getTime())) {
                 console.warn(`Invalid target date: ${targetDate}`);
                 return 0;
             }
             
-            // Reset time to start of day for accurate day calculation
             target.setHours(0, 0, 0, 0);
             now.setHours(0, 0, 0, 0);
             
@@ -78,7 +113,6 @@ export class ConfigurationManager {
                 return '2026-02-01';
             }
             
-            // Check if date is in ISO format or convertible
             const isoDate = date.toISOString().split('T')[0];
             return isoDate;
         } catch (error) {
@@ -87,8 +121,6 @@ export class ConfigurationManager {
             return '2026-02-01';
         }
     }
-
-
 
     private validateAnimationSpeed(speed: string): 'slow' | 'normal' | 'fast' {
         const validSpeeds: ('slow' | 'normal' | 'fast')[] = ['slow', 'normal', 'fast'];

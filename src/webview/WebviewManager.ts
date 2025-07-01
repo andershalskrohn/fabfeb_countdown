@@ -52,7 +52,8 @@ export class WebviewManager {
 
         const config = this.configManager.getConfiguration();
         const daysUntil = this.configManager.calculateDaysUntil(config.targetDate);
-        const message = this.configManager.formatCountdownMessage(daysUntil, config.targetDate);
+        // Use the new alternating message system!
+        const message = this.configManager.getNextAlternatingMessage(config.targetDate);
         
         this.panel?.webview.postMessage({
             type: 'showCountdown',
